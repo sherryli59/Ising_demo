@@ -12,7 +12,7 @@ def find_critical_point(nrows, ncols, temperature_range, num_steps):
     avg_m = []
     for temperature in temperature_range:
         ising_model = IsingModel2D(nrows, ncols, temperature, random_init=False)
-        trajectory,_ = ising_model.simulate(num_steps)
+        trajectory,_ = ising_model.simulate(num_steps,burn_in=100)
         magnetizations = np.abs(np.mean(trajectory,axis=(1,2)))
         #suscep = susceptibility(magnetizations, temperature)
         avg_magnetization = np.mean(magnetizations)
@@ -21,8 +21,8 @@ def find_critical_point(nrows, ncols, temperature_range, num_steps):
 
 # Example usage:
 nrows, ncols = 50, 50
-temperature_range = np.linspace(0.1, 4, 50)
-num_steps = 500
+temperature_range = np.linspace(0.1, 4, 30)
+num_steps = 400
 
 avg_m = find_critical_point(nrows, ncols, temperature_range, num_steps)
 
