@@ -6,7 +6,7 @@ from ising.ising_model import IsingModel2D
 class TestIsingModel2D:
     @pytest.fixture
     def model(self):
-        return IsingModel2D(nrows=3, ncols=2, temperature=1.0)
+        return IsingModel2D(nrows=3, ncols=2, temperature=1.0, random_init=False)
 
     def test_initialization(self, model):
         assert model.spins.shape == (3, 2)
@@ -41,3 +41,4 @@ class TestIsingModel2D:
         assert len(energies) == 200
         #check the trajectories only contain -1 and 1
         assert np.all(np.isin(trajectories, [-1, 1]))
+
